@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>PRIVATE GALLERY EDIT</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      background: radial-gradient(circle at top left, #f0f0f5, #e7e5e4);
+    }
+
+    .login-panel {
+      width: min(420px, 100% - 32px);
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 26px 24px 22px;
+      box-shadow: 0 22px 45px rgba(0, 0, 0, 0.15);
+    }
+
+    .login-title {
+      font-size: 1.05rem;
+      letter-spacing: 0.22em;
+      font-weight: 400;
+      margin: 0 0 10px;
+    }
+
+    .login-sub {
+      font-size: 0.82rem;
+      color: #777;
+      margin: 0 0 22px;
+    }
+
+    .login-label {
+      display: block;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      color: #555;
+      margin-bottom: 6px;
+    }
+
+    .login-input {
+      width: 100%;
+      height: 40px;
+      border-radius: 999px;
+      border: 1px solid #e2e2e2;
+      background: #f7f7f7;
+      padding: 0 16px;
+      font-size: 0.88rem;
+      margin-bottom: 14px;
+      outline: none;
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .login-input:focus {
+      border-color: #111;
+      background: #ffffff;
+    }
+
+    .login-btn {
+      width: 100%;
+      height: 42px;
+      border-radius: 999px;
+      border: none;
+      background: #000000;
+      color: #ffffff;
+      font-size: 0.9rem;
+      letter-spacing: 0.12em;
+      font-weight: 400;
+      cursor: pointer;
+      margin-top: 4px;
+      transition: opacity 0.15s ease, transform 0.08s ease;
+    }
+
+    .login-btn:hover {
+      opacity: 0.93;
+    }
+
+    .login-btn:active {
+      transform: translateY(1px);
+    }
+
+    .login-status {
+      margin-top: 10px;
+      min-height: 1.2em;
+      font-size: 0.78rem;
+      color: #d33;
+    }
+
+    .login-notice {
+      margin-top: 14px;
+      font-size: 0.75rem;
+      color: #999;
+    }
+
+    /* 모바일에서 살짝 컴팩트하게 */
+    @media (max-width: 480px) {
+      body {
+        padding: 12px;
+      }
+
+      .login-panel {
+        padding: 22px 18px 18px;
+        border-radius: 24px;
+        box-shadow: 0 18px 38px rgba(0,0,0,0.14);
+      }
+
+      .login-title {
+        font-size: 0.98rem;
+        letter-spacing: 0.18em;
+      }
+
+      .login-sub {
+        font-size: 0.8rem;
+        margin-bottom: 18px;
+      }
+
+      .login-input {
+        height: 38px;
+        font-size: 0.85rem;
+      }
+
+      .login-btn {
+        height: 40px;
+        font-size: 0.88rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-panel">
+    <h1 class="login-title">PRIVATE GALLERY EDIT</h1>
+    <p class="login-sub">갤러리 편집 로그인</p>
+
+    <form id="login-form">
+      <label class="login-label" for="login-email">EMAIL</label>
+      <input
+        id="login-email"
+        class="login-input"
+        type="email"
+        placeholder="이메일을 입력하세요"
+        autocomplete="username"
+      />
+
+      <label class="login-label" for="login-password">PASSWORD</label>
+      <input
+        id="login-password"
+        class="login-input"
+        type="password"
+        placeholder="비밀번호를 입력하세요"
+        autocomplete="current-password"
+      />
+
+      <button type="submit" class="login-btn">ENTER</button>
+      <p id="login-status" class="login-status"></p>
+    </form>
+
+    <p class="login-notice">* 이 페이지는 관리자 전용입니다.</p>
+  </div>
+
+  <!-- Firebase 로그인 스크립트 -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA3DsyrwfjBMTYyJwyPGjapJbnLrmHFh28",
+      authDomain: "gallery-edit.firebaseapp.com",
+      projectId: "gallery-edit",
+      storageBucket: "gallery-edit.firebasestorage.app",
+      messagingSenderId: "998416858816",
+      appId: "1:998416858816:web:7a7edaae1b463816313725",
+      measurementId: "G-T47H6VYJRH"
+    };
+
+    const app  = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const form      = document.getElementById("login-form");
+    const emailEl   = document.getElementById("login-email");
+    const pwEl      = document.getElementById("login-password");
+    const statusEl  = document.getElementById("login-status");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      statusEl.textContent = "";
+
+      const email = emailEl.value.trim();
+      const pw    = pwEl.value;
+
+      signInWithEmailAndPassword(auth, email, pw)
+        .then(() => {
+          // ✅ 로그인 성공 → 실제 편집 페이지로 이동
+          // 🔧 여기 파일명만 네 편집페이지 이름으로 바꿔
+          window.location.href = "gallery-edit.html";
+        })
+        .catch((err) => {
+          console.error(err);
+          statusEl.textContent = "로그인에 실패했어요. 이메일/비밀번호를 다시 확인해주세요.";
+        });
+    });
+  </script>
+</body>
+</html>

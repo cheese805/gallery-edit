@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery Edit | Hongsungwon Archive</title>
+
+  <link rel="stylesheet" href="galleryeditstyle.css" />
+</head>
+<body>
+  <main class="edit-page">
+
+    <!-- 🛠 실제 에디트 UI (처음엔 잠김 상태) -->
+    <section class="edit-wrapper is-locked" id="edit-wrapper">
+      <!-- 상단 바: 로그인 정보 / 액션 -->
+      <header class="edit-topbar">
+        <div class="topbar-left">
+          <span class="topbar-badge">GALLERY EDIT</span>
+        </div>
+        <div class="topbar-right">
+          <button type="button" id="btn-new" class="btn subtle">새 항목</button>
+          <button type="button" id="btn-reload" class="btn subtle">다시 불러오기</button>
+          <button type="button" id="btn-logout" class="btn ghost">LOGOUT</button>
+        </div>
+      </header>
+
+      <!-- 본문 레이아웃: 왼쪽 리스트 / 오른쪽 폼 -->
+      <section class="edit-body">
+        <!-- 왼쪽: 항목 리스트 -->
+        <aside class="entry-list-panel">
+          <div class="list-toolbar">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="id / 날짜 / 태그 검색"
+            />
+          </div>
+
+          <ul id="entry-list" class="entry-list">
+            <!-- JS에서 채움 -->
+          </ul>
+        </aside>
+
+        <!-- 오른쪽: 상세 편집 폼 -->
+        <section class="entry-form-panel">
+          <form id="entry-form" autocomplete="off">
+            <!-- ID / 날짜 -->
+            <div class="form-row two-col">
+              <div class="field">
+                <label for="field-id">ID</label>
+                <input
+                  type="text"
+                  id="field-id"
+                  name="id"
+                  required
+                  placeholder="예:2025-01-24-instagram-post"
+                />
+              </div>
+
+              <div class="field">
+                <label for="field-date">DATE</label>
+                <input
+                  type="date"
+                  id="field-date"
+                  name="date"
+                />
+              </div>
+            </div>
+
+            <!-- SOURCE -->
+            <div class="form-row two-col">
+              <div class="field">
+                <label for="field-source-type">SOURCE TYPE</label>
+                <select id="field-source-type" name="sourceType">
+                  <option value="">(없음)</option>
+                  <option value="instagram_post">instagram_post</option>
+                  <option value="instagram_story">instagram_story</option>
+                  <option value="official_artist">official_artist</option>
+                  <option value="official_stage">official_stage</option>
+                  <option value="press">press</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="field-source-label">SOURCE LABEL</label>
+                <input
+                  type="text"
+                  id="field-source-label"
+                  name="sourceLabel"
+                  placeholder="예: 홍성원 배우님 인스타그램 스토리"
+                />
+              </div>
+            </div>
+
+            <!-- TAGS -->
+            <div class="form-row">
+              <div class="field">
+                <label for="field-tags">TAGS</label>
+                <textarea
+                  id="field-tags"
+                  name="tags"
+                  rows="2"
+                  placeholder="쉼표(,)로 구분. 예: 성원한_순간"
+                ></textarea>
+              </div>
+            </div>
+
+            <!-- MEDIA 리스트 -->
+            <div class="form-row">
+              <div class="field">
+                <label>MEDIA 리스트 (image / video)</label>
+
+                <div class="media-list" id="media-list">
+                  <!-- JS로 행 생성 -->
+                </div>
+
+                <div class="media-actions">
+                  <button type="button" class="btn small" id="btn-add-image">
+                    + 이미지
+                  </button>
+                  <button type="button" class="btn small" id="btn-add-video">
+                    + 비디오
+                  </button>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- 액션 버튼 -->
+            <div class="form-actions">
+              <button type="submit" class="btn primary" id="btn-save">
+                저장
+              </button>
+              <button type="button" class="btn danger" id="btn-delete">
+                삭제
+              </button>
+              <button type="button" class="btn" id="btn-reset">
+                초기화
+              </button>
+            </div>
+
+            <!-- 상태 / 에러 메시지 -->
+            <p id="status-text" class="status-text"></p>
+          </form>
+        </section>
+      </section>
+    </section>
+  </main>
+
+  <script src="galleryeditscript.js"></script>
+</body>
+</html>

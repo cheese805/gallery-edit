@@ -1,0 +1,451 @@
+/* ==============================
+   FONT
+   ============================== */
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 100;
+  src: url('font/Pretendard-Thin.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 200;
+  src: url('font/Pretendard-ExtraLight.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 300;
+  src: url('font/Pretendard-Light.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 400;
+  src: url('font/Pretendard-Medium.woff2') format('woff2');
+}
+
+/* RESET / BASE */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Pretendard', system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', sans-serif;
+  font-weight: 300;
+  line-height: 1.4;
+  color: #111;
+  background: radial-gradient(circle at top left, #f0f0f5, #e7e5e4);
+}
+
+/* ==============================
+   공통 버튼
+   ============================== */
+.btn {
+  border-radius: 999px;
+  border: 1px solid #d0d0d0;
+  background: #ffffff;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-weight: 300;
+  transition: background 0.15s ease, color 0.15s ease,
+    box-shadow 0.15s ease, transform 0.05s ease;
+}
+
+.btn.primary {
+  border-color: #111;
+  background: #111;
+  color: #fff;
+}
+
+.btn.danger {
+  border-color: #e57373;
+  color: #b71c1c;
+  background: #fff3f3;
+}
+
+.btn.subtle {
+  background: #f8f8f8;
+}
+
+.btn.ghost {
+  background: transparent;
+  border-color: transparent;
+}
+
+.btn.small {
+  font-size: 0.75rem;
+  padding: 4px 10px;
+}
+
+.btn.tiny {
+  font-size: 0.7rem;
+  padding: 3px 8px;
+}
+
+.btn:hover {
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.09);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* ==============================
+   전체 레이아웃
+   ============================== */
+.edit-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  padding: 40px 16px;
+  position: relative;
+}
+
+/* ==============================
+   에디트 래퍼
+   ============================== */
+.edit-wrapper {
+  width: 100%;
+  max-width: 1120px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 28px;
+  box-shadow: 0 22px 60px rgba(15, 23, 42, 0.22);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* 상단 바 */
+.edit-topbar {
+  display: flex;
+  align-items: center;
+  padding: 10px 18px;
+  border-bottom: 1px solid #eee;
+  background: linear-gradient(to right, #fafafa, #f5f5f5);
+}
+
+/* 왼쪽: GALLERY EDIT 배지 */
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: auto;
+}
+
+/* 오른쪽: 버튼 묶음 */
+.topbar-right {
+  display: flex;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.topbar-badge {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  padding: 3px 10px;
+  border: 1px solid #111;
+}
+
+/* 본문: 리스트 + 폼 */
+.edit-body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.4fr);
+  gap: 0;
+  min-height: 0;
+}
+
+/* 왼쪽 패널 */
+.entry-list-panel {
+  border-right: 1px solid #f0f0f0;
+  padding: 12px 12px 10px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.list-toolbar {
+  margin-bottom: 8px;
+}
+
+#search-input {
+  width: 100%;
+  height: 32px;
+  border-radius: 999px;
+  border: 1px solid #dcdcdc;
+  padding: 0 10px;
+  font-size: 0.82rem;
+  background: #fafafa;
+}
+
+.entry-list {
+  list-style: none;
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 2px;
+  margin-top: 6px;
+}
+
+.entry-item {
+  border-radius: 12px;
+  padding: 8px 9px;
+  margin-bottom: 4px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  font-size: 0.8rem;
+  transition: background 0.15s ease, color 0.15s ease,
+    border-color 0.15s ease, transform 0.05s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.entry-thumb {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: #f0f0f0;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.entry-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.entry-thumb.thumb-empty {
+  background: #f8f8f8;
+}
+
+/* 텍스트 영역 */
+.entry-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.entry-item-id {
+  font-weight: 400;
+}
+
+.entry-item-meta {
+  font-size: 0.7rem;
+  color: #777;
+}
+
+.entry-item:hover {
+  background: #f7f7f7;
+}
+
+.entry-item.active {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+  transform: translateY(1px);
+}
+
+/* 오른쪽 폼 패널 */
+.entry-form-panel {
+  padding: 14px 16px 12px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+#entry-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 0;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-row.two-col {
+  flex-direction: row;
+  gap: 10px;
+}
+
+.field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.field label {
+  font-size: 0.78rem;
+  margin-bottom: 3px;
+  color: #555;
+}
+
+.field input,
+.field textarea,
+.field select {
+  border-radius: 8px;
+  border: 1px solid #dcdcdc;
+  padding: 6px 8px;
+  font-size: 0.8rem;
+  resize: vertical;
+  background: #fdfdfd;
+}
+
+.field textarea {
+  min-height: 60px;
+}
+
+.hint {
+  margin-top: 2px;
+  font-size: 0.7rem;
+  color: #9b9b9b;
+}
+
+/* MEDIA 리스트 */
+.media-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 220px;
+  overflow-y: auto;
+  padding-right: 4px;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  padding: 6px;
+  background: #fafafa;
+}
+
+.media-row {
+  display: grid;
+  grid-template-columns: 0.9fr 2.1fr auto auto;
+  gap: 6px;
+  align-items: center;
+}
+
+.media-row select,
+.media-row input[type='text'] {
+  font-size: 0.78rem;
+  border-radius: 6px;
+  border: 1px solid #dcdcdc;
+  padding: 4px 6px;
+  background: #ffffff;
+}
+
+.media-row input[type='file'] {
+  font-size: 0.7rem;
+}
+
+.media-row .btn {
+  font-size: 0.7rem;
+  padding: 4px 8px;
+  white-space: nowrap;
+}
+
+.media-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+/* 폼 액션 / 상태 */
+.form-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.status-text {
+  margin-top: 4px;
+  font-size: 0.75rem;
+  color: #777;
+}
+
+/* ==============================
+   MOBILE / RESPONSIVE
+   ============================== */
+@media (max-width: 900px) {
+  .edit-page {
+    padding: 16px 10px 24px;
+  }
+
+  .edit-wrapper {
+    border-radius: 20px;
+  }
+
+  .edit-body {
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+  }
+
+  .entry-list-panel {
+    border-right: none;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 6px;
+  }
+
+  .entry-form-panel {
+    padding-top: 10px;
+  }
+
+  .form-row.two-col {
+    flex-direction: column;
+  }
+
+  .media-row {
+    grid-template-columns: 1fr 2fr;
+    grid-auto-rows: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .edit-page {
+    padding: 8px;
+  }
+
+  .edit-wrapper {
+    border-radius: 12px;
+    box-shadow: none;
+  }
+
+  .edit-body {
+    grid-template-columns: 1fr;
+  }
+
+  .entry-list-panel {
+    max-height: 40vh;
+    overflow-y: auto;
+    border-bottom: 1px solid #eee;
+  }
+
+  .entry-form-panel {
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+
+  .edit-topbar {
+    padding: 10px 14px;
+  }
+
+  .topbar-right .btn {
+    font-size: 0.7rem;
+    padding: 5px 8px;
+  }
+}
